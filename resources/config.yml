@@ -1,0 +1,3 @@
+#The default value for the ability command (The command automatically sets the final argument to this
+#if the sender does not give the final argument. Has to be true or false.
+ability-default-bool: true
