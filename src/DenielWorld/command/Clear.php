@@ -1,12 +1,11 @@
 <?php
 
-namespace DenielWorld\commands;
+namespace DenielWorld\command;
 
 use DenielWorld\Loader;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pocketmine\item\Item;
-use pocketmine\item\ItemIds;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat as TF;
 

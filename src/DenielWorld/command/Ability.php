@@ -1,5 +1,7 @@
 <?php
 
+namespace DenielWorld\command;
+
 use pocketmine\command\PluginCommand;
 use DenielWorld\Loader;
 use pocketmine\command\CommandSender;

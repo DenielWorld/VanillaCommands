@@ -4,9 +4,9 @@ namespace DenielWorld;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
-use DenielWorld\commands\AlwaysDay;
-use Ability;
-use DenielWorld\commands\Clear;
+use DenielWorld\command\AlwaysDay;
+use DenielWorld\command\Ability;
+use DenielWorld\command\Clear;
 
 class Loader extends PluginBase implements Listener{
 
