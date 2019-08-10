@@ -5,6 +5,7 @@ namespace DenielWorld\command;
 use DenielWorld\Loader;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
+use pocketmine\Player;
 
 class AlwaysDay extends PluginCommand{
 
@@ -18,16 +19,17 @@ class AlwaysDay extends PluginCommand{
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
-        if(isset($args[0]) and $args[0] == true){
-            $this->getPlugin()->getServer()->getDefaultLevel()->setTime(5000);
-            $this->getPlugin()->getServer()->getDefaultLevel()->stopTime();
-        }
-        elseif(isset($args[0]) and $args[0] == false){
-            $this->getPlugin()->getServer()->getDefaultLevel()->startTime();
-        }
-        else{
-            $this->getPlugin()->getServer()->getDefaultLevel()->setTime(5000);
-            $this->getPlugin()->getServer()->getDefaultLevel()->stopTime();
+        if($sender instanceof Player) {
+            $level = $sender->getLevel();
+            if (isset($args[0]) and $args[0] == true) {
+                $level->setTime(5000);
+                $level->stopTime();
+            } elseif (isset($args[0]) and $args[0] == false) {
+                $level->startTime();
+            } else {
+                $level->setTime(5000);
+                $level->stopTime();
+            }
         }
     }
 }

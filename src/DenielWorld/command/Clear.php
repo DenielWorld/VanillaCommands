@@ -21,29 +21,29 @@ class Clear extends PluginCommand{
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
-        if(isset($args[0]) and $args[0] instanceof Player){
-            if(isset($args[1]) and is_int($args[1]) and $sender instanceof Player){
-                foreach($args[0]->getInventory()->getContents() as $slot => $item) {
-                    if(!isset($args[2]) and $item->getId() == $args[1]) {
-                        $args[0]->getInventory()->remove(Item::get($item->getId(), 0, $item->getCount()));
-                    }
-                    elseif($item->getId() == $args[1] and isset($args[2]) and is_int($args[2]) and $item->getDamage() == $args[2] and !isset($args[3])) {
-                        $args[0]->getInventory()->remove(Item::get($item->getId(), $item->getDamage(), $item->getCount()));
-                    }
-                    elseif($item->getId() == $args[1] and isset($args[2]) and is_int($args[2]) and $item->getDamage() == $args[2] and is_int($args[3]) and isset($args[3])){
-                        $args[0]->getInventory()->remove(Item::get($item->getId(), $item->getDamage(), $args[3]));
-                    }
-                    else{
+        if (isset($args[0])) {
+            $player = $this->getPlugin()->getServer()->getPlayer($args[0]);
+            if(!$player){
+                return false;
+            }
+            elseif (isset($args[1]) and is_int($args[1])) {
+                foreach ($player->getInventory()->getContents() as $slot => $item) {
+                    if (!isset($args[2]) and $item->getId() == $args[1]) {
+                        $player->getInventory()->remove(Item::get($item->getId(), 0, $item->getCount()));
+                    } elseif ($item->getId() == $args[1] and isset($args[2]) and is_int($args[2]) and $item->getDamage() == $args[2] and !isset($args[3])) {
+                        $player->getInventory()->remove(Item::get($item->getId(), $item->getDamage(), $item->getCount()));
+                    } elseif ($item->getId() == $args[1] and isset($args[2]) and is_int($args[2]) and $item->getDamage() == $args[2] and is_int($args[3]) and isset($args[3])) {
+                        $player->getInventory()->remove(Item::get($item->getId(), $item->getDamage(), $args[3]));
+                    } else {
                         $sender->sendMessage(TF::RED . "Please provide a valid item id (Optional: Meta, Count");
                     }
                 }
+            } else {
+                $player->getInventory()->clearAll();
             }
-            else{
-                $args[0]->getInventory()->clearAll();
-            }
-        }
-        else {
+        } else {
             $sender->sendMessage(TF::RED . "Please specify a real player");
         }
+        return true;
     }
 }
