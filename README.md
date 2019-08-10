@@ -11,6 +11,12 @@
 
 [X] Clear Command
 
+* Features
+
+[] Command Success Messages
+
+[] Customizable command messages
+
 * EventListener
 
 [] Ability States
