@@ -23,7 +23,7 @@ class Clear extends PluginCommand{
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if(isset($args[0]) and $args[0] instanceof Player){
-            if(isset($args[1]) and $args[1] instanceof ItemIds and $sender instanceof Player){
+            if(isset($args[1]) and is_int($args[1]) and $sender instanceof Player){
                 foreach($args[0]->getInventory()->getContents() as $slot => $item) {
                     if(!isset($args[2]) and $item->getId() == $args[1]) {
                         $args[0]->getInventory()->remove(Item::get($item->getId(), 0, $item->getCount()));
@@ -40,7 +40,7 @@ class Clear extends PluginCommand{
                 }
             }
             else{
-                $sender->sendMessage(TF::RED . "Please specify a real item name or an item id");
+                $args[0]->getInventory()->clearAll();
             }
         }
         else {

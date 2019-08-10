@@ -4,3 +4,34 @@ api: 3.0.0
 main: DenielWorld\Loader
 author: DenielWorld
 description: PMMP Plugin that adds vanilla commands on your server
+permissions:
+  vanillacommands:
+    default: false
+    description: "Use everything in VanillaCommands"
+    children:
+      vanillacommands.state:
+        default: false
+        description: "Takes away all abilities from a player"
+        children:
+          vanillacommands.state.mute:
+            default: false
+            description: "Takes away speaking rights from a player"
+          vanillacommands.state.worldbuilder:
+            default: false
+            description: "Takes away building rights from a player"
+          vanillacommands.state.mayfly:
+            default: false
+            description: "Takes away flying rights from a player"
+      vanillacommands.command:
+            default: op
+            description: "Lets the player use everything in VanillaCommands"
+            children:
+              vanillacommands.command.ability:
+                default: op
+                description: "Lets you manage abilities of a certain player"
+              vanillacommands.command.alwaysday:
+                default: op
+                description: "Lets you make the time always be day"
+              vanillacommands.command.clear:
+                default: op
+                description: "Lets you manage other player's inventories/remove items from their inventories"

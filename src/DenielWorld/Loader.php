@@ -18,7 +18,7 @@ class Loader extends PluginBase implements Listener{
             new Clear("clear", $this)
         ];
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getServer()->getCommandMap()->registerAll("VanillaCommands", $commands);
+        $this->getServer()->getCommandMap()->registerAll("vanillacommands", $commands);
     }
 
     //todo listener for ability states
