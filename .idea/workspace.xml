@@ -31,6 +31,11 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\denie\Documents\GitHub\VanillaCommands" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -53,7 +58,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565342158263</updated>
-      <workItem from="1565342159829" duration="17882000" />
+      <workItem from="1565342159829" duration="18582000" />
     </task>
     <servers />
   </component>
