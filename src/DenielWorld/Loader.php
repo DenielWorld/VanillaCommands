@@ -5,7 +5,11 @@ namespace DenielWorld;
 use DenielWorld\command\Connect;
 use DenielWorld\command\SetBlock;
 use DenielWorld\command\SetMaxPlayers;
+use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\block\BlockPlaceEvent;
+use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
@@ -62,5 +66,29 @@ class Loader extends PluginBase implements Listener{
     public function onLeave(PlayerQuitEvent $event){
         array_shift($this->playercount);
     }
-    //todo listener for ability states
+
+    public function chatWhenMuted(PlayerChatEvent $event){
+        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.mute")){
+            $event->setCancelled();
+        }
+    }
+
+    public function placeWhenNotWorldBuilder(BlockPlaceEvent $event){
+        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
+            $event->setCancelled();
+        }
+    }
+
+    public function breakWhenNotWorldBuilder(BlockBreakEvent $event){
+        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
+            $event->setCancelled();
+        }
+    }
+    public function flyingWhenCantFly(PlayerMoveEvent $event){
+        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.mayfly")) {
+            if($event->getPlayer()->isFlying()){
+                $event->getPlayer()->setFlying(false);
+            }
+        }
+    }
 }
