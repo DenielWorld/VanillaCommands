@@ -35,3 +35,12 @@ permissions:
               vanillacommands.command.clear:
                 default: op
                 description: "Lets you manage other player's inventories/remove items from their inventories"
+              vanillacommands.command.connect:
+                default: true
+                description: "Transfer to a different server"
+              vanillacommands.command.setblock:
+                default: op
+                description: "Set a specific block at a specific location"
+              vanillacommands.command.setmaxplayers:
+                default: op
+                description: "Set the max amount of players for the current game session"

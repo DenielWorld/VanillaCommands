@@ -6,10 +6,10 @@ use DenielWorld\Loader;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pocketmine\item\Item;
-use pocketmine\Player;
+use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\utils\TextFormat as TF;
 
-class Clear extends PluginCommand{
+class Clear extends PluginCommand implements PluginIdentifiableCommand{
 
     public function __construct(string $name, Loader $owner)
     {

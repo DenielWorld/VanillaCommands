@@ -5,10 +5,11 @@ namespace DenielWorld\command;
 use pocketmine\command\PluginCommand;
 use DenielWorld\Loader;
 use pocketmine\command\CommandSender;
+use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\utils\Config;
 
-class Ability extends PluginCommand {
+class Ability extends PluginCommand implements PluginIdentifiableCommand {
 
     private $reg_abilities = ["mute", "worldbuilder", "mayfly"];
 

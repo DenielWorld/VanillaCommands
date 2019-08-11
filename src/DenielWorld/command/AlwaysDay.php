@@ -5,9 +5,10 @@ namespace DenielWorld\command;
 use DenielWorld\Loader;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
+use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\Player;
 
-class AlwaysDay extends PluginCommand{
+class AlwaysDay extends PluginCommand implements PluginIdentifiableCommand {
 
     public function __construct(string $name, Loader $owner)
     {

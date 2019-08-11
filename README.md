@@ -11,6 +11,12 @@
 
 [X] Clear Command
 
+[X] Connect Command
+
+[X] SetBlock Command
+
+[X] SetMaxPlayers Command
+
 * Features
 
 [] Command Success Messages
@@ -19,7 +25,9 @@
 
 * EventListener
 
-[] Ability States
+[] Ability States Listener
+
+[X] MaxPlayer Listener
 
 * Testing
 

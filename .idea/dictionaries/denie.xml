@@ -3,6 +3,12 @@
     <words>
       <w>alwaysday</w>
       <w>deniel</w>
+      <w>itemblock</w>
+      <w>maxcount</w>
+      <w>oldblockhandles</w>
+      <w>playercount</w>
+      <w>setblock</w>
+      <w>setmaxplayers</w>
       <w>vanillacommands</w>
       <w>worldbuilder</w>
     </words>
