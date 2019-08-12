@@ -40,6 +40,7 @@ class AlwaysDay extends PluginCommand implements PluginIdentifiableCommand
                 $sender->sendMessage("Successfully set AlwaysDay to true");
             }
         }else{
-            $sender->sendMessage("Please run this command in-game"
+            $sender->sendMessage("Please run this command in-game");
+        }
     }
 }
