@@ -8,7 +8,8 @@ use pocketmine\command\PluginCommand;
 use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\Player;
 
-class AlwaysDay extends PluginCommand implements PluginIdentifiableCommand {
+class AlwaysDay extends PluginCommand implements PluginIdentifiableCommand
+{
 
     public function __construct(string $name, Loader $owner)
     {
@@ -20,17 +21,26 @@ class AlwaysDay extends PluginCommand implements PluginIdentifiableCommand {
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
-        if($sender instanceof Player) {
+        if ($sender instanceof Player) {
             $level = $sender->getLevel();
-            if (isset($args[0]) and $args[0] == true) {
+            if (isset($args[0])) {
+                switch ($args[0]) {
+                    case false:
+                        $level->startTime();
+                        $sender->sendMessage("Successfully set AlwaysDay to false");
+                        break;
+                    default:
+                        $level->setTime(5000);
+                        $level->stopTime();
+                        $sender->sendMessage("Successfully set AlwaysDay to true");
+                }
+            }else{
                 $level->setTime(5000);
                 $level->stopTime();
-            } elseif (isset($args[0]) and $args[0] == false) {
-                $level->startTime();
-            } else {
-                $level->setTime(5000);
-                $level->stopTime();
+                $sender->sendMessage("Successfully set AlwaysDay to true");
             }
+        }else{
+            $sender->sendMessage("Please run this command in-game");
         }
     }
 }
