@@ -27,16 +27,19 @@ class AlwaysDay extends PluginCommand implements PluginIdentifiableCommand
                 switch ($args[0]) {
                     case false:
                         $level->startTime();
+                        $sender->sendMessage("Successfully set AlwaysDay to false");
                         break;
                     default:
                         $level->setTime(5000);
                         $level->stopTime();
+                        $sender->sendMessage("Successfully set AlwaysDay to true");
                 }
-                $sender->sendMessage("Succes");
             }else{
                 $level->setTime(5000);
                 $level->stopTime();
+                $sender->sendMessage("Successfully set AlwaysDay to true");
             }
-        }
+        }else{
+            $sender->sendMessage("Please run this command in-game"
     }
 }
