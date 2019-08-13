@@ -2,11 +2,19 @@
   <dictionary name="denie">
     <words>
       <w>alwaysday</w>
+      <w>chorusflower</w>
+      <w>composter</w>
+      <w>constname</w>
+      <w>constnames</w>
+      <w>constnamestring</w>
+      <w>constnamestrings</w>
       <w>deniel</w>
       <w>itemblock</w>
       <w>maxcount</w>
       <w>oldblockhandles</w>
+      <w>pconstnamestring</w>
       <w>playercount</w>
+      <w>playsound</w>
       <w>setblock</w>
       <w>setmaxplayers</w>
       <w>vanillacommands</w>

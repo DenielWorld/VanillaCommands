@@ -3,6 +3,7 @@
 namespace DenielWorld;
 
 use DenielWorld\command\Connect;
+use DenielWorld\command\PlaySound;
 use DenielWorld\command\SetBlock;
 use DenielWorld\command\SetMaxPlayers;
 use pocketmine\event\block\BlockBreakEvent;
@@ -24,6 +25,8 @@ class Loader extends PluginBase implements Listener{
     //Storing MaxPlayerCount here passed from SetMaxPlayers command
     private $maxcount;
 
+    //todo add this stuff to max player manager - unset($array[array_search($value, $array)])
+    //todo move some stuff from here to a separate EventListener, this should be mainly for loading and initiating what the plugin has to do
     public function onEnable()
     {
         $commands = [
@@ -32,14 +35,15 @@ class Loader extends PluginBase implements Listener{
             new Clear("clear", $this),
             new Connect("connect", $this),
             new SetBlock("setblock", $this),
-            new SetMaxPlayers("setmaxplayers", $this)
+            new SetMaxPlayers("setmaxplayers", $this),
+            new PlaySound("playsound", $this)
         ];
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getServer()->getCommandMap()->registerAll("vanillacommands", $commands);
     }
 
     public function getInstance(){
-        return self::getInstance();
+        return $this;
     }
 
     public function getMaxCount(){

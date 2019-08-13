@@ -17,6 +17,12 @@
 
 [X] SetMaxPlayers Command
 
+[X] PlaySound Command
+
+* Managers (For Devs)
+
+[X] SoundManager
+
 * Features
 
 [] Command Success Messages
@@ -25,7 +31,7 @@
 
 * EventListener
 
-[] Ability States Listener
+[X] Ability States Listener
 
 [X] MaxPlayer Listener
 
