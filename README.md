@@ -19,6 +19,8 @@
 
 [X] PlaySound Command
 
+[X] MobEvent Command
+
 * Managers (For Devs)
 
 [X] SoundManager
@@ -34,6 +36,8 @@
 [X] Ability States Listener
 
 [X] MaxPlayer Listener
+
+[X] MobEvent Listener
 
 * Testing
 

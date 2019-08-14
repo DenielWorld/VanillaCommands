@@ -2,6 +2,9 @@
 
 namespace DenielWorld\utils;
 
+use pocketmine\network\mcpe\protocol\PlaySoundPacket;
+use pocketmine\Player;
+
 class SoundManager
 {
     //IMPORTANT TODO - Not all the sounds were implemented, since there was too many vanilla sounds, and I got bored entering the same thing over and over lol. In other words, PRs that will complete the const list, const array, name array, const string array, and ids array are welcome and very appreciated :D. The list for the leftover sounds ends at the bottom, make sure to follow the same array relation for appropriate sounds. Example: in const array key 67 could be RANDOM_SOUND, that means in other arrays key 67 should also point to that sound, such as in names array it would be kind of like "random.sound". Hope you get the point.
@@ -107,6 +110,49 @@ class SoundManager
             }
         }
         return null; //@throw exception? returning "unknown.sound" may cause packet issues, since it is in the names array.
+    }
+
+    public function sendSoundPacket(Player $player, string $sound, int $volume = 3, int $pitch = 2, int $x = 8, int $y = 8, int $z = 8) : void{
+        if($x == 8 and $y == 8 and $z == 8 and $this->isValidName($sound)) {
+            $packet = new PlaySoundPacket();
+            $packet->x = $player->x;
+            $packet->y = $player->y;
+            $packet->z = $player->z;
+            $packet->volume = $volume;
+            $packet->pitch = $pitch;
+            $packet->soundName = $sound;
+            $player->sendDataPacket($packet);
+        }
+        elseif($x == 8 and $y == 8 and $z == 8 and !$this->isValidName($sound) and $this->isValidConstString($sound)) {
+            $packet = new PlaySoundPacket();
+            $packet->x = $player->x;
+            $packet->y = $player->y;
+            $packet->z = $player->z;
+            $packet->volume = $volume;
+            $packet->pitch = $pitch;
+            $packet->soundName = $this->constAsName($sound);
+            $player->sendDataPacket($packet);
+        }
+        elseif($x !== 8 and $y !== 8 and $z !== 8 and $this->isValidName($sound)) {
+            $packet = new PlaySoundPacket();
+            $packet->x = $x;
+            $packet->y = $y;
+            $packet->z = $z;
+            $packet->volume = $volume;
+            $packet->pitch = $pitch;
+            $packet->soundName = $sound;
+            $player->sendDataPacket($packet);
+        }
+        elseif($x !== 8 and $y !== 8 and $z !== 8 and !$this->isValidName($sound) and $this->isValidConstString($sound)) {
+            $packet = new PlaySoundPacket();
+            $packet->x = $x;
+            $packet->y = $y;
+            $packet->z = $z;
+            $packet->volume = $volume;
+            $packet->pitch = $pitch;
+            $packet->soundName =$this->constAsName($sound);
+            $player->sendDataPacket($packet);
+        }
     }
 
 

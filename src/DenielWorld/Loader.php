@@ -3,11 +3,15 @@
 namespace DenielWorld;
 
 use DenielWorld\command\Connect;
+use DenielWorld\command\MobEvent;
 use DenielWorld\command\PlaySound;
 use DenielWorld\command\SetBlock;
 use DenielWorld\command\SetMaxPlayers;
+use pocketmine\entity\EntityIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
+use pocketmine\event\entity\EntityEvent;
+use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerMoveEvent;
@@ -25,6 +29,12 @@ class Loader extends PluginBase implements Listener{
     //Storing MaxPlayerCount here passed from SetMaxPlayers command
     private $maxcount;
 
+    //Storing mob events that shouldn't occur here
+    private $mobevents = [];
+
+    //Legal mob events
+    private $legalmobevents = ["events_enabled", "minecraft:pillager_patrols_event", "minecraft:wandering_trader_event"];
+
     //todo add this stuff to max player manager - unset($array[array_search($value, $array)])
     //todo move some stuff from here to a separate EventListener, this should be mainly for loading and initiating what the plugin has to do
     public function onEnable()
@@ -36,7 +46,8 @@ class Loader extends PluginBase implements Listener{
             new Connect("connect", $this),
             new SetBlock("setblock", $this),
             new SetMaxPlayers("setmaxplayers", $this),
-            new PlaySound("playsound", $this)
+            new PlaySound("playsound", $this),
+            new MobEvent("mobevent", $this)
         ];
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getServer()->getCommandMap()->registerAll("vanillacommands", $commands);
@@ -44,6 +55,33 @@ class Loader extends PluginBase implements Listener{
 
     public function getInstance(){
         return $this;
+    }
+
+    public function getMobEvents(){
+        return $this->mobevents;
+    }
+
+    public function getLegalMobEvents(){
+        return $this->legalmobevents;
+    }
+
+    public function addMobEvent(string $mobevent) : void{
+        foreach($this->legalmobevents as $legalmobevent) {
+            if ($mobevent == $legalmobevent){
+                array_push($this->mobevents, $mobevent);
+            }
+        }
+    }
+
+    public function removeMobEvent(string $mobevent) : void{
+        foreach($this->legalmobevents as $legalmobevent) {
+            if ($mobevent == $legalmobevent){
+                $index = array_search($mobevent, $this->mobevents);
+                if($index !== false){
+                    unset($this->mobevents[$index]);
+                }
+            }
+        }
     }
 
     public function getMaxCount(){
@@ -93,6 +131,22 @@ class Loader extends PluginBase implements Listener{
             if($event->getPlayer()->isFlying()){
                 $event->getPlayer()->setFlying(false);
             }
+        }
+    }
+
+    public function mobEvent(EntityEvent $event){
+        if(in_array("events_enabled", $this->mobevents)) $event->setCancelled();
+    }
+
+    public function pillagerEvent(EntitySpawnEvent $event){
+        if($event->getEntity()->getId() === EntityIds::VINDICATOR or $event->getEntity()->getId() === EntityIds::EVOCATION_ILLAGER){
+            if(in_array("minecraft:pillager_patrols_event", $this->mobevents)) $event->setCancelled();
+        }
+    }
+
+    public function traderEvent(EntitySpawnEvent $event){
+        if($event->getEntity()->getNameTag() === "Wandering Trader"){//Wandering trader id ain't even implemented in PMMP, gotta use a name dependency until/for future PMMP updates.
+            if(in_array("minecraft:wandering_trader_event", $this->mobevents)) $event->setCancelled();
         }
     }
 }
