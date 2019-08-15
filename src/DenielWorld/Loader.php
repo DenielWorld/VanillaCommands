@@ -3,6 +3,7 @@
 namespace DenielWorld;
 
 use DenielWorld\command\Connect;
+use DenielWorld\command\ImmutableWorld;
 use DenielWorld\command\MobEvent;
 use DenielWorld\command\PlaySound;
 use DenielWorld\command\SetBlock;
@@ -16,6 +17,7 @@ use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\player\PlayerQuitEvent;
+use pocketmine\level\Level;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use DenielWorld\command\AlwaysDay;
@@ -35,6 +37,9 @@ class Loader extends PluginBase implements Listener{
     //Legal mob events
     private $legalmobevents = ["events_enabled", "minecraft:pillager_patrols_event", "minecraft:wandering_trader_event"];
 
+    //Worlds that cannot have blocks broken or placed in them
+    private $immutable_worlds = [];
+
     //todo add this stuff to max player manager - unset($array[array_search($value, $array)])
     //todo move some stuff from here to a separate EventListener, this should be mainly for loading and initiating what the plugin has to do
     public function onEnable()
@@ -47,7 +52,8 @@ class Loader extends PluginBase implements Listener{
             new SetBlock("setblock", $this),
             new SetMaxPlayers("setmaxplayers", $this),
             new PlaySound("playsound", $this),
-            new MobEvent("mobevent", $this)
+            new MobEvent("mobevent", $this),
+            new ImmutableWorld("immutableworld", $this)
         ];
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getServer()->getCommandMap()->registerAll("vanillacommands", $commands);
@@ -80,6 +86,27 @@ class Loader extends PluginBase implements Listener{
                 if($index !== false){
                     unset($this->mobevents[$index]);
                 }
+            }
+        }
+    }
+
+    public function getImmutableWorlds(){
+        return $this->immutable_worlds;
+    }
+
+    public function addImmutableWorld(string $level){
+        if($this->getServer()->getLevelByName($level) instanceof Level){//might be a pointless check for peeps with IDE but still
+            if(!in_array($level, $this->immutable_worlds)){
+                array_push($this->immutable_worlds, $level);
+            }
+        }
+    }
+
+    public function removeImmutableWorld(string $level){
+        if($this->getServer()->getLevelByName($level) instanceof Level){
+            if(in_array($level, $this->immutable_worlds)){
+                $index = array_search($level, $this->immutable_worlds);
+                unset($this->immutable_worlds[$index]);
             }
         }
     }
@@ -147,6 +174,18 @@ class Loader extends PluginBase implements Listener{
     public function traderEvent(EntitySpawnEvent $event){
         if($event->getEntity()->getNameTag() === "Wandering Trader"){//Wandering trader id ain't even implemented in PMMP, gotta use a name dependency until/for future PMMP updates.
             if(in_array("minecraft:wandering_trader_event", $this->mobevents)) $event->setCancelled();
+        }
+    }
+
+    public function immutableBlockPlace(BlockPlaceEvent $event){
+        if(in_array($event->getPlayer()->getLevel()->getName(), $this->immutable_worlds)){
+            $event->setCancelled();
+        }
+    }
+
+    public function immutableBlockBreak(BlockBreakEvent $event){
+        if(in_array($event->getPlayer()->getLevel()->getName(), $this->immutable_worlds)){
+            $event->setCancelled();
         }
     }
 }
