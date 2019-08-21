@@ -11,7 +11,7 @@ use DenielWorld\command\SetMaxPlayers;
 use pocketmine\entity\EntityIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
-use pocketmine\event\entity\EntityEvent;
+use pocketmine\event\entity\EntityDespawnEvent;
 use pocketmine\event\entity\EntitySpawnEvent;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerJoinEvent;
@@ -23,6 +23,7 @@ use pocketmine\event\Listener;
 use DenielWorld\command\AlwaysDay;
 use DenielWorld\command\Ability;
 use DenielWorld\command\Clear;
+use pocketmine\utils\Config;
 
 class Loader extends PluginBase implements Listener{
     //Storing online player names in here, mostly used as count($playercount)
@@ -87,6 +88,17 @@ class Loader extends PluginBase implements Listener{
                     unset($this->mobevents[$index]);
                 }
             }
+        }
+    }
+
+    //Will be used in the future for none vanilla features that make the already existing commands better
+    public function isAdvancedVanilla() : bool{
+        $cfg = new Config($this->getDataFolder() . "config.yml", Config::YAML);
+        if($cfg->get("advanced-vanilla") == true){
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -161,7 +173,11 @@ class Loader extends PluginBase implements Listener{
         }
     }
 
-    public function mobEvent(EntityEvent $event){
+    public function mobSpawnEvent(EntitySpawnEvent $event){
+        if(in_array("events_enabled", $this->mobevents)) $event->setCancelled();
+    }
+
+    public function mobDespawnEvent(EntityDespawnEvent $event){
         if(in_array("events_enabled", $this->mobevents)) $event->setCancelled();
     }
 
