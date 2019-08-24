@@ -168,9 +168,10 @@ class Loader extends PluginBase implements Listener{
     public function flyingWhenCantFly(PlayerMoveEvent $event){
         if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.mayfly")) {
             if($event->getPlayer()->isFlying()){
-                $event->getPlayer()->setFlying(false);
+                $event->getPlayer()->setFlying(true);
             }
-        }
+            else {
+                $event->getPlayer()->setFlying(false);
     }
 
     public function mobSpawnEvent(EntitySpawnEvent $event){
