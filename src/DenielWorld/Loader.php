@@ -149,24 +149,24 @@ class Loader extends PluginBase implements Listener{
     }
 
     public function chatWhenMuted(PlayerChatEvent $event){
-        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.mute")){
+        if(!$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state") or !$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state.mute")){
             $event->setCancelled();
         }
     }
 
     public function placeWhenNotWorldBuilder(BlockPlaceEvent $event){
-        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
+        if(!$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state") or !$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
             $event->setCancelled();
         }
     }
 
     public function breakWhenNotWorldBuilder(BlockBreakEvent $event){
-        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
+        if(!$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state") or !$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
             $event->setCancelled();
         }
     }
     public function flyingWhenCantFly(PlayerMoveEvent $event){
-        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.mayfly")) {
+        if(!$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state") or !$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state.mayfly")) {
             if($event->getPlayer()->isFlying()){
                 $event->getPlayer()->setFlying(false);
             }
