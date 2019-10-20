@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bbf382e-b427-41c2-8314-1ec33abd0c73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/vanillacommands.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.poggit.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.poggit.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vanillacommands.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vanillacommands.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +82,7 @@
       <workItem from="1567993455794" duration="599000" />
       <workItem from="1568003192424" duration="1619000" />
       <workItem from="1568073831469" duration="5000" />
-      <workItem from="1571603351323" duration="7004000" />
+      <workItem from="1571603351323" duration="7608000" />
     </task>
     <servers />
   </component>
