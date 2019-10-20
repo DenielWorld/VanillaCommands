@@ -1,7 +1,7 @@
 name: VanillaCommands
-version: 1.0.0
+version: 1.0.0-alpha1
 api: 3.0.0
-main: DenielWorld\Loader
+main: DenielWorld\VanillaCommands\Loader
 author: DenielWorld
 description: "PMMP Plugin that adds vanilla commands on your server | Will be customizable in the future"
 permissions:
@@ -38,9 +38,21 @@ permissions:
               vanillacommands.command.connect:
                 default: true
                 description: "Transfer to a different server"
+              vanillacommands.command.immutableworld:
+                default: op
+                description: "Set immutable worlds for the current game session"
+              vanillacommands.command.mobevent:
+                default: op
+                description: "Control specific mob events for the current game sessions"#Pretty useless with the current mob system in PMMP
+              vanillacommands.command.playsound:
+                default: op
+                description: "Play a sound at a specific coordinate/to a specific player"
               vanillacommands.command.setblock:
                 default: op
                 description: "Set a specific block at a specific location"
               vanillacommands.command.setmaxplayers:
                 default: op
                 description: "Set the max amount of players for the current game session"
+              vanillacommands.command.tag:
+                default: op
+                description: "Manage a player's tag"

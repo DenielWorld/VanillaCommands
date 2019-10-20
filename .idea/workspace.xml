@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6bbf382e-b427-41c2-8314-1ec33abd0c73" name="Default Changelist" comment="" />
+    <list default="true" id="6bbf382e-b427-41c2-8314-1ec33abd0c73" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DenielWorld/Loader.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DenielWorld/VanillaCommands/Loader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DenielWorld/command/Ability.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DenielWorld/VanillaCommands/command/Ability.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DenielWorld/command/AlwaysDay.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DenielWorld/VanillaCommands/command/AlwaysDay.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DenielWorld/command/Clear.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DenielWorld/VanillaCommands/command/Clear.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DenielWorld/command/Connect.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DenielWorld/VanillaCommands/command/Connect.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DenielWorld/command/ImmutableWorld.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DenielWorld/VanillaCommands/command/ImmutableWorld.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DenielWorld/command/MobEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DenielWorld/VanillaCommands/command/MobEvent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DenielWorld/command/PlaySound.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DenielWorld/VanillaCommands/command/PlaySound.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DenielWorld/command/SetBlock.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DenielWorld/VanillaCommands/command/SetBlock.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DenielWorld/command/SetMaxPlayers.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DenielWorld/VanillaCommands/command/SetMaxPlayers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DenielWorld/utils/SoundManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DenielWorld/VanillaCommands/utils/SoundManager.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +47,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\denie\Documents\GitHub\VanillaCommands\src\DenielWorld\VanillaCommands" />
       <recent name="C:\Users\denie\Documents\GitHub\VanillaCommands" />
     </key>
   </component>
@@ -65,7 +80,17 @@
       <workItem from="1565586971270" duration="19280000" />
       <workItem from="1565838167017" duration="4023000" />
       <workItem from="1566356585732" duration="1474000" />
-      <workItem from="1566682091625" duration="300000" />
+      <workItem from="1566682091625" duration="1174000" />
+      <workItem from="1567921798286" duration="1434000" />
+      <workItem from="1567923291829" duration="1575000" />
+      <workItem from="1567981062519" duration="644000" />
+      <workItem from="1567986026989" duration="599000" />
+      <workItem from="1567987903905" duration="599000" />
+      <workItem from="1567989766367" duration="598000" />
+      <workItem from="1567993455794" duration="599000" />
+      <workItem from="1568003192424" duration="1619000" />
+      <workItem from="1568073831469" duration="5000" />
+      <workItem from="1571603351323" duration="5097000" />
     </task>
     <servers />
   </component>

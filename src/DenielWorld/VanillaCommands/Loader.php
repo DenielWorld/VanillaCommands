@@ -1,13 +1,8 @@
 <?php
 
-namespace DenielWorld;
+namespace DenielWorld\VanillaCommands;
 
-use DenielWorld\command\Connect;
-use DenielWorld\command\ImmutableWorld;
-use DenielWorld\command\MobEvent;
-use DenielWorld\command\PlaySound;
-use DenielWorld\command\SetBlock;
-use DenielWorld\command\SetMaxPlayers;
+use DenielWorld\VanillaCommands\command\{Connect, ImmutableWorld, MobEvent, SetBlock, SetMaxPlayers, AlwaysDay, Ability, Clear, PlaySound, Tag};
 use pocketmine\entity\EntityIds;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -20,9 +15,6 @@ use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\level\Level;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
-use DenielWorld\command\AlwaysDay;
-use DenielWorld\command\Ability;
-use DenielWorld\command\Clear;
 use pocketmine\utils\Config;
 
 class Loader extends PluginBase implements Listener{
@@ -41,10 +33,14 @@ class Loader extends PluginBase implements Listener{
     //Worlds that cannot have blocks broken or placed in them
     private $immutable_worlds = [];
 
-    //todo add this stuff to max player manager - unset($array[array_search($value, $array)])
+    //todo add this stuff to max player manager - unset($array[array_search($value, $array)]) p.s I don't remember what this is for and why I didn't do it as of 10/20/2019
     //todo move some stuff from here to a separate EventListener, this should be mainly for loading and initiating what the plugin has to do
     public function onEnable()
     {
+        $this->init();
+    }
+
+    public function init() : bool{
         $commands = [
             new Ability("ability", $this),
             new AlwaysDay("alwaysday", $this),
@@ -54,13 +50,19 @@ class Loader extends PluginBase implements Listener{
             new SetMaxPlayers("setmaxplayers", $this),
             new PlaySound("playsound", $this),
             new MobEvent("mobevent", $this),
-            new ImmutableWorld("immutableworld", $this)
+            new ImmutableWorld("immutableworld", $this),
+            new Tag("tag", $this)
         ];
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->getServer()->getCommandMap()->registerAll("vanillacommands", $commands);
+        foreach($commands as $command) {
+            $name = $command->getName();
+            if($this->getServer()->getCommandMap()->getCommand($name) == null) return false;
+        }
+        return true;
     }
 
-    public function getInstance(){
+    public function getInstance() : Loader{
         return $this;
     }
 
@@ -202,6 +204,13 @@ class Loader extends PluginBase implements Listener{
     public function immutableBlockBreak(BlockBreakEvent $event){
         if(in_array($event->getPlayer()->getLevel()->getName(), $this->immutable_worlds)){
             $event->setCancelled();
+        }
+    }
+
+    public function onFirstJoin(PlayerJoinEvent $event){
+        if(!$event->getPlayer()->hasPlayedBefore()){
+            $player_data = new Config($this->getDataFolder() . "player_data.yml", Config::YAML);
+            $player_data->setNested($event->getPlayer()->getLowerCaseName() . ".tags", ["default-tag"]);
         }
     }
 }

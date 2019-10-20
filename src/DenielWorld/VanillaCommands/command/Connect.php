@@ -1,8 +1,8 @@
 <?php
 
-namespace DenielWorld\command;//Same as /transfer command from PMMP, but different name lmao.
+namespace DenielWorld\VanillaCommands\command;//Same as /transfer command from PMMP, but different name lmao.
 
-use DenielWorld\Loader;
+use DenielWorld\VanillaCommands\Loader;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pocketmine\command\PluginIdentifiableCommand;

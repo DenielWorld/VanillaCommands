@@ -1,6 +1,6 @@
 <?php
 
-namespace DenielWorld\utils;
+namespace DenielWorld\VanillaCommands\utils;
 
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\Player;

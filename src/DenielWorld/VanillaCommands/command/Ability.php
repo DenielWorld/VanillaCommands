@@ -1,9 +1,9 @@
 <?php
 
-namespace DenielWorld\command;
+namespace DenielWorld\VanillaCommands\command;
 
 use pocketmine\command\PluginCommand;
-use DenielWorld\Loader;
+use DenielWorld\VanillaCommands\Loader;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\utils\TextFormat as TF;

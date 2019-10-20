@@ -1,9 +1,9 @@
 <?php
 
-namespace DenielWorld\command;
+namespace DenielWorld\VanillaCommands\command;
 
-use DenielWorld\Loader;
-use DenielWorld\utils\SoundManager;
+use DenielWorld\VanillaCommands\Loader;
+use DenielWorld\VanillaCommands\utils\SoundManager;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pocketmine\command\PluginIdentifiableCommand;

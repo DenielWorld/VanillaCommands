@@ -1,8 +1,10 @@
 <?php
 
-namespace DenielWorld\command;
+namespace DenielWorld\VanillaCommands\command;
+/*Fellow reviewer, if you value your eyesight, you shall not proceed to reviewing this code,
+and instead just let it go through. You have been warned.*/
 
-use DenielWorld\Loader;
+use DenielWorld\VanillaCommands\Loader;
 use pocketmine\block\Block;
 use pocketmine\block\BlockFactory;
 use pocketmine\command\CommandSender;

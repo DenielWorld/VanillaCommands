@@ -1,8 +1,8 @@
 <?php
 
-namespace DenielWorld\command;
+namespace DenielWorld\VanillaCommands\command;
 
-use DenielWorld\Loader;
+use DenielWorld\VanillaCommands\Loader;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pocketmine\command\PluginIdentifiableCommand;
