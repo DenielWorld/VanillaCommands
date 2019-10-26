@@ -3,56 +3,35 @@
  
  W.I.P
 # TODO 
-* Commands
+**Commands**
+* [X] Ability Command
+* [X] AlwaysDay Command
+* [X] Clear Command
+* [X] Connect Command
+* [X] SetBlock Command
+* [X] SetMaxPlayers Command
+* [X] PlaySound Command
+* [X] MobEvent Command
+* [X] ImmutableWorld Command
 
-[X] Ability Command
+**Managers (For Devs)**
+* [X] SoundManager
 
-[X] AlwaysDay Command
+**Features**
+* [ ] Command Success Messages
+* [ ] Customizable command messages
 
-[X] Clear Command
+**EventListener**
+* [X] Ability States Listener
+* [X] MaxPlayer Listener
+* [X] MobEvent Listener
+* [X] ImmutableWorld Listener
 
-[X] Connect Command
+**Testing**
+* [ ] Testing the plugin
+* [ ] Fixing bugs | Bug reports are appreciated :) |
 
-[X] SetBlock Command
-
-[X] SetMaxPlayers Command
-
-[X] PlaySound Command
-
-[X] MobEvent Command
-
-[X] ImmutableWorld Command
-
-* Managers (For Devs)
-
-[X] SoundManager
-
-* Features
-
-[] Command Success Messages
-
-[] Customizable command messages
-
-* EventListener
-
-[X] Ability States Listener
-
-[X] MaxPlayer Listener
-
-[X] MobEvent Listener
-
-[X] ImmutableWorld Listener
-
-* Testing
-
-[] Testing the plugin
-
-[] Fixing bugs | Bug reports are appreciated :) |
-
-* Info
-
-[] Description for all commands
-
-[] Command guide
-
-[] Insert the rest of commands into TODO
+**Info**
+* [ ] Description for all commands
+* [ ] Command guide
+* [ ] Insert the rest of commands into TODO
