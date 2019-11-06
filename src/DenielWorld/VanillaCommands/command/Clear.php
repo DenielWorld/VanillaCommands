@@ -10,8 +10,8 @@ use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\utils\TextFormat as TF;
 
 class Clear extends PluginCommand implements PluginIdentifiableCommand{
-  protected $everyone = $this->getServer()->getOnlinePlayers()
-  protected $self = $sender->getName()
+  protected $everyone = $this->getServer()->getOnlinePlayers();
+  protected $self = $sender->getName();
   // TODO Add @e and @p
 
     public function __construct(string $name, Loader $owner)
