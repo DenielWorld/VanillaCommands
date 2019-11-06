@@ -3,18 +3,13 @@
 namespace DenielWorld\VanillaCommands\command;
 
 use DenielWorld\VanillaCommands\Loader;
-use pocketmine\command\CommandSender;
+use pocketmnameine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pocketmine\item\Item;
 use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\utils\TextFormat as TF;
-use pocketmine\Server
 
 class Clear extends PluginCommand implements PluginIdentifiableCommand{
-  protected $everyone = $this->getServer()->getOnlinePlayers();
-  protected $self = $sender->getName();
-  // TODO Add @e and @p
-
     public function __construct(string $name, Loader $owner)
     {
         parent::__construct($name, $owner);
@@ -25,8 +20,8 @@ class Clear extends PluginCommand implements PluginIdentifiableCommand{
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
-      str_replace("@a",$this->everyone,$args[0]);
-      str_replace("@s",$this->self,$args[0]);
+      str_replace("@a",$this->getServer()->getOnlinePlayers(),$args[0]);
+      str_replace("@s",$sender->getName(),$args[0]);
         if (isset($args[0])) {
             $player = $this->getPlugin()->getServer()->getPlayer($args[0]);
             if(!$player){
