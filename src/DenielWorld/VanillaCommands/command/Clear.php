@@ -3,7 +3,7 @@
 namespace DenielWorld\VanillaCommands\command;
 
 use DenielWorld\VanillaCommands\Loader;
-use pocketmnameine\command\CommandSender;
+use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pocketmine\item\Item;
 use pocketmine\command\PluginIdentifiableCommand;
