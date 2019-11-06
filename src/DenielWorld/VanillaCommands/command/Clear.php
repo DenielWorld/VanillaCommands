@@ -8,6 +8,7 @@ use pocketmine\command\PluginCommand;
 use pocketmine\item\Item;
 use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\utils\TextFormat as TF;
+use pocketmine\Server
 
 class Clear extends PluginCommand implements PluginIdentifiableCommand{
   protected $everyone = $this->getServer()->getOnlinePlayers();
