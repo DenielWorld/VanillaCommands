@@ -95,11 +95,9 @@ class Loader extends PluginBase implements Listener{
     }
 
     public function addImmutableWorld(string $level){
-        if($this->getServer()->getLevelByName($level) instanceof Level){//might be a pointless check for peeps with IDE but still
-            if(!in_array($level, $this->immutable_worlds)){
-                array_push($this->immutable_worlds, $level);
-            }
-        }
+	    if(!in_array($level, $this->immutable_worlds)){
+		    $this->immutable_worlds[] = $level;
+	    }
     }
 
     public function removeImmutableWorld(string $level){
