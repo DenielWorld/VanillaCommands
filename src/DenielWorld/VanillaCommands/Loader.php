@@ -38,22 +38,18 @@ class Loader extends PluginBase implements Listener{
     public function onEnable()
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-	    $this->getServer()->getCommandMap()->registerAll("vanillacommands", [
-		    new Ability("ability", $this),
-		    new AlwaysDay("alwaysday", $this),
-		    new Clear("clear", $this),
-		    new Connect("connect", $this),
-		    new SetBlock("setblock", $this),
-		    new SetMaxPlayers("setmaxplayers", $this),
-		    new PlaySound("playsound", $this),
-		    new MobEvent("mobevent", $this),
-		    new ImmutableWorld("immutableworld", $this),
-		    new Tag("tag", $this)
-	    ]);
-    }
-
-    public function getInstance() : Loader{
-        return $this;
+        $this->getServer()->getCommandMap()->registerAll("vanillacommands", [
+            new Ability("ability", $this),
+            new AlwaysDay("alwaysday", $this),
+            new Clear("clear", $this),
+            new Connect("connect", $this),
+            new SetBlock("setblock", $this),
+            new SetMaxPlayers("setmaxplayers", $this),
+            new PlaySound("playsound", $this),
+            new MobEvent("mobevent", $this),
+            new ImmutableWorld("immutableworld", $this),
+            new Tag("tag", $this)
+        ]);
     }
 
     public function getMobEvents(){

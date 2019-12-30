@@ -27,6 +27,7 @@ class AlwaysDay extends PluginCommand implements PluginIdentifiableCommand
 	            $level->setTime(5000);
 	            $level->stopTime();
 	            $sender->sendMessage("Day-Night cycle locked");
+	            return;
             }
             if(is_bool($args[0])) {
             	if($args[0]){
@@ -35,7 +36,7 @@ class AlwaysDay extends PluginCommand implements PluginIdentifiableCommand
 	            }else{
 		            $level->setTime(5000);
 		            $level->stopTime();
-		            $sender->sendMessage("Day-Night cycle locked");
+		            $sender->sendMessage("Day-Night cycle unlocked");
 	            }
             }
         }else{

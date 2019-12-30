@@ -12,13 +12,11 @@ use pocketmine\utils\TextFormat;
 
 class Ability extends PluginCommand implements PluginIdentifiableCommand {
 
-    private $reg_abilities = ["mute", "worldbuilder", "mayfly"];
-
     public function __construct(string $name, Loader $owner)
     {
         parent::__construct($name, $owner);
         $this->setPermission("vanillacommands.command.ability");
-        $this->setUsage("/ability <player: player> <ability: string> <value: bool>");
+        $this->setUsage("/ability <player: target> <ability: string> <value: Boolean>");
         $this->setDescription("Sets a player's ability.");
     }
 
@@ -26,8 +24,8 @@ class Ability extends PluginCommand implements PluginIdentifiableCommand {
     {
         if(count($args) < 3)
             throw new InvalidCommandSyntaxException();
-        if(!in_array(strtolower($args[1]), $this->reg_abilities)) {
-            $sender->sendMessage(TextFormat::RED."Ability must be one of: ".implode(", ", $this->reg_abilities));
+        if(!in_array(strtolower($args[1]), ["mute", "worldbuilder", "mayfly"])) {
+            $sender->sendMessage(TextFormat::RED."Ability must be one of: ".implode(", ", ["mute", "worldbuilder", "mayfly"]));
             return;
         }
         if(!is_bool($args[2]))
@@ -41,8 +39,8 @@ class Ability extends PluginCommand implements PluginIdentifiableCommand {
             $player->addAttachment($this->getPlugin(), "vanillacommands.state." . $args[1], true);
         } else {
             if ($player->hasPermission("vanillacommands.state." . $args[1])) {
-                $attachment = $player->addAttachment($this->getPlugin(), "vanillacommands.state." . $args[1], true);
-                $player->removeAttachment($attachment);
+                $attachment = $player->addAttachment($this->getPlugin(), "vanillacommands.state." . $args[1], false);
+                //$player->removeAttachment($attachment);
             }
         }
     }
