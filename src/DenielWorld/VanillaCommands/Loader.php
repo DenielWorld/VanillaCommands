@@ -37,29 +37,19 @@ class Loader extends PluginBase implements Listener{
     //todo move some stuff from here to a separate EventListener, this should be mainly for loading and initiating what the plugin has to do
     public function onEnable()
     {
-        $this->init();
-    }
-
-    public function init() : bool{
-        $commands = [
-            new Ability("ability", $this),
-            new AlwaysDay("alwaysday", $this),
-            new Clear("clear", $this),
-            new Connect("connect", $this),
-            new SetBlock("setblock", $this),
-            new SetMaxPlayers("setmaxplayers", $this),
-            new PlaySound("playsound", $this),
-            new MobEvent("mobevent", $this),
-            new ImmutableWorld("immutableworld", $this),
-            new Tag("tag", $this)
-        ];
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getServer()->getCommandMap()->registerAll("vanillacommands", $commands);
-        foreach($commands as $command) {
-            $name = $command->getName();
-            if($this->getServer()->getCommandMap()->getCommand($name) == null) return false;
-        }
-        return true;
+	    $this->getServer()->getCommandMap()->registerAll("vanillacommands", [
+		    new Ability("ability", $this),
+		    new AlwaysDay("alwaysday", $this),
+		    new Clear("clear", $this),
+		    new Connect("connect", $this),
+		    new SetBlock("setblock", $this),
+		    new SetMaxPlayers("setmaxplayers", $this),
+		    new PlaySound("playsound", $this),
+		    new MobEvent("mobevent", $this),
+		    new ImmutableWorld("immutableworld", $this),
+		    new Tag("tag", $this)
+	    ]);
     }
 
     public function getInstance() : Loader{
