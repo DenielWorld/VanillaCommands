@@ -18,12 +18,6 @@ use pocketmine\event\Listener;
 use pocketmine\utils\Config;
 
 class Loader extends PluginBase implements Listener{
-    //Storing online player names in here, mostly used as count($playercount)
-    private $playercount = [];
-
-    //Storing MaxPlayerCount here passed from SetMaxPlayers command
-    private $maxcount;
-
     //Storing mob events that shouldn't occur here
     private $mobevents = [];
 
@@ -107,31 +101,6 @@ class Loader extends PluginBase implements Listener{
                 unset($this->immutable_worlds[$index]);
             }
         }
-    }
-
-    public function getMaxCount(){
-        return $this->maxcount;
-    }
-
-    public function setMaxCount(int $count){
-        $this->maxcount = $count;
-    }
-
-    public function getPlayerCount(){
-        return count($this->playercount);
-    }
-
-    public function onJoin(PlayerJoinEvent $event){
-        if(isset($this->maxcount) and $this->maxcount == count($this->playercount)) {
-            $event->getPlayer()->kick("The server is full", false);
-        }
-        elseif(isset($this->maxcount) and $this->maxcount !== count($this->playercount)){
-            array_push($this->playercount, $event->getPlayer()->getName());
-        }
-    }
-
-    public function onLeave(PlayerQuitEvent $event){
-        array_shift($this->playercount);
     }
 
     public function chatWhenMuted(PlayerChatEvent $event){
