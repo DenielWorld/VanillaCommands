@@ -19,13 +19,13 @@ use pocketmine\utils\Config;
 
 class Loader extends PluginBase implements Listener{
     //Storing mob events that shouldn't occur here
-    private $mobevents = [];
+	protected $mobevents = [];
 
     //Legal mob events
-    private $legalmobevents = ["events_enabled", "minecraft:pillager_patrols_event", "minecraft:wandering_trader_event"];
+    protected $legalmobevents = ["events_enabled", "minecraft:pillager_patrols_event", "minecraft:wandering_trader_event"];
 
     //Worlds that cannot have blocks broken or placed in them
-    private $immutable_worlds = [];
+	protected $immutable_worlds = [];
 
     //todo add this stuff to max player manager - unset($array[array_search($value, $array)]) p.s I don't remember what this is for and why I didn't do it as of 10/20/2019
     //todo move some stuff from here to a separate EventListener, this should be mainly for loading and initiating what the plugin has to do
@@ -104,24 +104,24 @@ class Loader extends PluginBase implements Listener{
     }
 
     public function chatWhenMuted(PlayerChatEvent $event){
-        if(!$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state") or !$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state.mute")){
+        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.mute")){
             $event->setCancelled();
         }
     }
 
     public function placeWhenNotWorldBuilder(BlockPlaceEvent $event){
-        if(!$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state") or !$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
+        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
             $event->setCancelled();
         }
     }
 
     public function breakWhenNotWorldBuilder(BlockBreakEvent $event){
-        if(!$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state") or !$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
+        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
             $event->setCancelled();
         }
     }
     public function flyingWhenCantFly(PlayerMoveEvent $event){
-        if(!$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state") or !$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state.mayfly")) {
+        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.mayfly")) {
             if($event->getPlayer()->isFlying()){
                 $event->getPlayer()->setFlying(false);
             }
