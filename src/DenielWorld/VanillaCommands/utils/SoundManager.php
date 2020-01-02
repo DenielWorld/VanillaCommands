@@ -9,152 +9,28 @@ class SoundManager
 {
     //IMPORTANT TODO - Not all the sounds were implemented, since there was too many vanilla sounds, and I got bored entering the same thing over and over lol. In other words, PRs that will complete the const list, const array, name array, const string array, and ids array are welcome and very appreciated :D. The list for the leftover sounds ends at the bottom, make sure to follow the same array relation for appropriate sounds. Example: in const array key 67 could be RANDOM_SOUND, that means in other arrays key 67 should also point to that sound, such as in names array it would be kind of like "random.sound". Hope you get the point.
 
-    public const BEACON_POWER = -1; //secret sound xD, tbh i just messed up the numbering
-    public const UNKNOWN_SOUND = 0;
-    public const AMBIENT_WEATHER_LIGHTNING_IMPACT = 1;
-    public const AMBIENT_WEATHER_RAIN = 2;
-    public const AMBIENT_WEATHER_THUNDER = 3;
-    public const ARMOR_EQUIP_CHAIN = 4;
-    public const ARMOR_EQUIP_DIAMOND = 5;
-    public const ARMOR_EQUIP_GENERIC = 6;
-    public const ARMOR_EQUIP_GOLD = 7;
-    public const ARMOR_EQUIP_IRON = 8;
-    public const ARMOR_EQUIP_LEATHER = 9;
-    public const BEACON_ACTIVATE = 10;
-    public const BEACON_AMBIENT = 11;
-    public const BEACON_DEACTIVATE = 12;
-    public const BLOCK_BAMBOO_BREAK = 13;
-    public const BLOCK_BAMBOO_FALL = 14;
-    public const BLOCK_BAMBOO_HIT = 15;
-    public const BLOCK_BAMBOO_PLACE = 16;
-    public const BLOCK_BAMBOO_STEP = 17;
-    public const BLOCK_BAMBOO_SAPLING_BREAK = 18;
-    public const BLOCK_BAMBOO_SAPLING_PLACE = 19;
-    public const BLOCK_BARREL_CLOSE = 20;
-    public const BLOCK_BARREL_OPEN = 21;
-    public const BLOCK_BELL_HIT = 22;
-    public const BLOCK_CAMPFIRE_CRACKLE = 23;
-    public const BLOCK_CHORUSFLOWER_DEATH = 24;
-    public const BLOCK_CHORUSFLOWER_GROW = 25;
-    public const BLOCK_COMPOSTER_EMPTY = 26;
-    public const BLOCK_COMPOSTER_FILL = 27;
-    public const BLOCK_COMPOSTER_FILL_SUCCESS = 28;
-    public const BLOCK_COMPOSTER_READY = 29;
-    public const BLOCK_END_PORTAL_SPAWN = 30;
+    CONST IDS = ["beacon.power" => -1, "unknown.sound" => 0, "ambient.weather.lightning.impact" => 1, "ambient.weather.rain" => 2, "ambient.weather.thunder" => 3, "armor.equip_chain" => 4, "armor.equip_diamond" => 5, "armor.equip_generic" => 6, "armor.equip_gold" => 7, "armor.equip_iron" => 8, "armor.equip_leather" => 9, "beacon.activate" => 10, "beacon.ambient" => 11, "beacon.deactivate" => 12, "block.bamboo.break" => 13, "block.bamboo.fall" => 14, "block.bamboo.hit" => 15, "block.bamboo.place" => 16, "block.bamboo.step" => 17, "block.bamboo_sapling.break" => 18, "block.bamboo_sapling.place" => 19, "block.barrel.close" => 20, "block.barrel.open" => 21, "block.bell.hit" => 22, "block.campfire.crackle" => 23, "block.chorusflower.death" => 24, "block.chorusflower.grow" => 25, "block.composter.empty" => 26, "block.composter.fill" => 27, "block.composter.fill_success" => 28, "block.composter.ready" => 29, "block.end_portal.spawn" => 30];
 
-    private $ids = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-
-    private $names = ["beacon.power", "unknown.sound", "ambient.weather.lightning.impact", "ambient.weather.rain", "ambient.weather.thunder", "armor.equip_chain", "armor.equip_diamond", "armor.equip_generic", "armor.equip_gold", "armor.equip_iron", "armor.equip_leather", "beacon.activate", "beacon.ambient", "beacon.deactivate", "block.bamboo.break", "block.bamboo.fall", "block.bamboo.hit", "block.bamboo.place", "block.bamboo.step", "block.bamboo_sapling.break", "block.bamboo_sapling.place", "block.barrel.close", "block.barrel.open", "block.bell.hit", "block.campfire.crackle", "block.chorusflower.death", "block.chorusflower.grow", "block.composter.empty", "block.composter.fill", "block.composter.fill_success", "block.composter.ready", "block.end_portal.spawn"];
-
-    private $constnamestrings =  ["BEACON_POWER", "UNKNOWN_SOUND", "AMBIENT_WEATHER_LIGHTNING_IMPACT", "AMBIENT_WEATHER_RAIN", "AMBIENT_WEATHER_THUNDER", "ARMOR_EQUIP_CHAIN", "ARMOR_EQUIP_DIAMOND", "ARMOR_EQUIP_GENERIC", "ARMOR_EQUIP_GOLD", "ARMOR_EQUIP_IRON", "ARMOR_EQUIP_LEATHER", "BEACON_ACTIVATE", "BEACON_AMBIENT", "BEACON_DEACTIVATE", "BLOCK_BAMBOO_BREAK", "BLOCK_BAMBOO_FALL", "BLOCK_BAMBOO_HIT", "BLOCK_BAMBOO_PLACE", "BLOCK_BAMBOO_STEP", "BLOCK_BAMBOO_SAPLING_BREAK", "BLOCK_BAMBOO_SAPLING_PLACE", "BLOCK_BARREL_CLOSE", "BLOCK_BARREL_OPEN", "BLOCK_BELL_HIT", "BLOCK_CAMPFIRE_CRACKLE", "BLOCK_CHORUSFLOWER_DEATH", "BLOCK_CHORUSFLOWER_GROW", "BLOCK_COMPOSTER_EMPTY", "BLOCK_COMPOSTER_FILL", "BLOCK_COMPOSTER_FILL_SUCCESS", "BLOCK_COMPOSTER_READY", "BLOCK_END_PORTAL_SPAWN"];
-
-    private $constnames = [self::BEACON_POWER, self::UNKNOWN_SOUND, self::AMBIENT_WEATHER_LIGHTNING_IMPACT, self::AMBIENT_WEATHER_RAIN, self::AMBIENT_WEATHER_THUNDER, self::ARMOR_EQUIP_CHAIN, self::ARMOR_EQUIP_DIAMOND, self::ARMOR_EQUIP_GENERIC, self::ARMOR_EQUIP_GOLD, self::ARMOR_EQUIP_IRON, self::ARMOR_EQUIP_LEATHER, self::BEACON_ACTIVATE, self::BEACON_AMBIENT, self::BEACON_DEACTIVATE, self::BLOCK_BAMBOO_BREAK, self::BLOCK_BAMBOO_FALL, self::BLOCK_BAMBOO_HIT, self::BLOCK_BAMBOO_PLACE, self::BLOCK_BAMBOO_STEP, self::BLOCK_BAMBOO_SAPLING_BREAK, self::BLOCK_BAMBOO_SAPLING_PLACE, self::BLOCK_BARREL_CLOSE, self::BLOCK_BARREL_OPEN, self::BLOCK_BELL_HIT, self::BLOCK_CAMPFIRE_CRACKLE, self::BLOCK_CHORUSFLOWER_DEATH, self::BLOCK_CHORUSFLOWER_GROW, self::BLOCK_COMPOSTER_EMPTY, self::BLOCK_COMPOSTER_FILL, self::BLOCK_COMPOSTER_FILL_SUCCESS, self::BLOCK_COMPOSTER_READY, self::BLOCK_END_PORTAL_SPAWN];
-
-    public function getIds(){
-        return $this->ids;
+    public function isValidId(int $id) : bool {
+        return in_array($id, self::IDS);
     }
 
-    public function getConstNames(){
-        return $this->constnames;
+    public function isValidName(string $name) : bool {
+        return in_array($name, array_keys(self::IDS));
     }
 
-    public function getConstNameStrings(){
-        return $this->constnamestrings;
+    public function getNameFromId(int $soundId) : ?string {
+        $key = array_search($soundId, self::IDS);
+        if($key !== false)
+            return $key;
+        return null;
     }
 
-    public function getNames(){
-        return $this->names;
+    public function getIdFromName(string $soundName) : ?int {
+        if(isset(self::IDS[$soundName]))
+            return self::IDS[$soundName];
+        return null;
     }
-
-    public function isValidId(int $id){
-        if(in_array($id, $this->ids)){
-            return true;
-        }
-        return false;
-    }
-
-    public function isValidConstString(string $constname){
-        if(in_array($constname, $this->constnamestrings)){
-            return true;
-        }
-        return false;
-    }
-
-    public function isValidConst($const){
-        if(in_array($const, $this->constnames)){
-            return true;
-        }
-        return false;
-    }
-
-    public function isValidName(string $name){
-        if(in_array($name, $this->names)){
-            return true;
-        }
-        return false;
-    }
-
-    public function idAsName(int $id) : int {
-        foreach($this->ids as $placing => $pid){
-            if($pid == $id){
-                return $this->names[$placing];
-            }
-        }
-        return null; //@throw exception? returning "unknown.sound" may cause packet issues, since it is in the names array.
-    }//new sample for As functions
-
-    public function constAsName(string $constnamestring) : int {
-        foreach($this->constnamestrings as $placing => $pconstnamestring){
-            if($pconstnamestring == $constnamestring){
-                return $this->names[$placing];
-            }
-        }
-        return null; //@throw exception? returning "unknown.sound" may cause packet issues, since it is in the names array.
-    }
-
-    public function sendSoundPacket(Player $player, string $sound, int $volume = 3, int $pitch = 2, int $x = 8, int $y = 8, int $z = 8) : void{
-        if($x == 8 and $y == 8 and $z == 8 and $this->isValidName($sound)) {
-            $packet = new PlaySoundPacket();
-            $packet->x = $player->x;
-            $packet->y = $player->y;
-            $packet->z = $player->z;
-            $packet->volume = $volume;
-            $packet->pitch = $pitch;
-            $packet->soundName = $sound;
-            $player->sendDataPacket($packet);
-        }
-        elseif($x == 8 and $y == 8 and $z == 8 and !$this->isValidName($sound) and $this->isValidConstString($sound)) {
-            $packet = new PlaySoundPacket();
-            $packet->x = $player->x;
-            $packet->y = $player->y;
-            $packet->z = $player->z;
-            $packet->volume = $volume;
-            $packet->pitch = $pitch;
-            $packet->soundName = $this->constAsName($sound);
-            $player->sendDataPacket($packet);
-        }
-        elseif($x !== 8 and $y !== 8 and $z !== 8 and $this->isValidName($sound)) {
-            $packet = new PlaySoundPacket();
-            $packet->x = $x;
-            $packet->y = $y;
-            $packet->z = $z;
-            $packet->volume = $volume;
-            $packet->pitch = $pitch;
-            $packet->soundName = $sound;
-            $player->sendDataPacket($packet);
-        }
-        elseif($x !== 8 and $y !== 8 and $z !== 8 and !$this->isValidName($sound) and $this->isValidConstString($sound)) {
-            $packet = new PlaySoundPacket();
-            $packet->x = $x;
-            $packet->y = $y;
-            $packet->z = $z;
-            $packet->volume = $volume;
-            $packet->pitch = $pitch;
-            $packet->soundName =$this->constAsName($sound);
-            $player->sendDataPacket($packet);
-        }
-    }
-
 
     /*
 Todo - Add the rest of the vanilla sounds from this list. Feel free to PR these if you know what ur doing.
