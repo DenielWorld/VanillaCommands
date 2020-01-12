@@ -45,7 +45,7 @@ class PlaySound extends PluginCommand implements PluginIdentifiableCommand{
             $packet->z = $sender->z;
             $packet->volume = 3;
             $packet->pitch = 2;
-        }elseif(!isset($args[2])) {
+        }elseif(!isset($args[4])) {
             $player = $this->getPlugin()->getServer()->getPlayer($args[1]);
             if(!$player instanceof Player) {
                 $sender->sendMessage(TextFormat::RED."Player not found");
@@ -59,32 +59,14 @@ class PlaySound extends PluginCommand implements PluginIdentifiableCommand{
             $packet->volume = 3;
             $packet->pitch = 2;
             $player->sendDataPacket($packet);
-        }elseif(count($args) == 5) {
+        }elseif(count($args) < 7) {
             $packet = new PlaySoundPacket();
             $packet->soundName = $name;
             $packet->x = $args[2];
             $packet->y = $args[3];
             $packet->z = $args[4];
-            $packet->volume = 3;
-            $packet->pitch = 2;
-            $sender->sendDataPacket($packet);
-        }elseif(count($args) == 6) {
-            $packet = new PlaySoundPacket();
-            $packet->soundName = $name;
-            $packet->x = $args[2];
-            $packet->y = $args[3];
-            $packet->z = $args[4];
-            $packet->volume = $args[5];
-            $packet->pitch = 2;
-            $sender->sendDataPacket($packet);
-        }elseif(count($args) > 6) {
-            $packet = new PlaySoundPacket();
-            $packet->soundName = $name;
-            $packet->x = $args[2];
-            $packet->y = $args[3];
-            $packet->z = $args[4];
-            $packet->volume = $args[5];
-            $packet->pitch = $args[6];
+            $packet->volume = $args[5] ?? 3;
+            $packet->pitch = $args[6] ?? 2;
             $sender->sendDataPacket($packet);
         }else{
             throw new InvalidCommandSyntaxException();
