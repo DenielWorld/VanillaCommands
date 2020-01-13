@@ -15,29 +15,29 @@ class AlwaysDay extends PluginCommand implements PluginIdentifiableCommand
     {
         parent::__construct($name, $owner);
         $this->setPermission("vanillacommands.command.alwaysday");
-        $this->setUsage("/alwaysday <true/false>");
-        $this->setDescription("Sets the time to day and pauses it");
+        $this->setUsage("/alwaysday [lock: Boolean]");
+        $this->setDescription("Locks and unlocks the day-night cycle");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if ($sender instanceof Player) {
             $level = $sender->getLevel();
-            if (isset($args[0])) {
-                switch ($args[0]) {
-                    case false:
-                        $level->startTime();
-                        $sender->sendMessage("Successfully set AlwaysDay to false");
-                        break;
-                    default:
-                        $level->setTime(5000);
-                        $level->stopTime();
-                        $sender->sendMessage("Successfully set AlwaysDay to true");
-                }
-            }else{
-                $level->setTime(5000);
-                $level->stopTime();
-                $sender->sendMessage("Successfully set AlwaysDay to true");
+            if (!isset($args[0])) {
+	            $level->setTime(5000);
+	            $level->stopTime();
+	            $sender->sendMessage("Day-Night cycle locked");
+	            return;
+            }
+            if(is_bool($args[0])) {
+            	if($args[0]){
+		            $level->startTime();
+		            $sender->sendMessage("Day-Night cycle locked");
+	            }else{
+		            $level->setTime(5000);
+		            $level->stopTime();
+		            $sender->sendMessage("Day-Night cycle unlocked");
+	            }
             }
         }else{
             $sender->sendMessage("Please run this command in-game");

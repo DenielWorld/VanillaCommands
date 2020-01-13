@@ -18,30 +18,21 @@ use pocketmine\event\Listener;
 use pocketmine\utils\Config;
 
 class Loader extends PluginBase implements Listener{
-    //Storing online player names in here, mostly used as count($playercount)
-    private $playercount = [];
-
-    //Storing MaxPlayerCount here passed from SetMaxPlayers command
-    private $maxcount;
-
     //Storing mob events that shouldn't occur here
-    private $mobevents = [];
+	protected $mobevents = [];
 
     //Legal mob events
-    private $legalmobevents = ["events_enabled", "minecraft:pillager_patrols_event", "minecraft:wandering_trader_event"];
+    protected $legalmobevents = ["events_enabled", "minecraft:pillager_patrols_event", "minecraft:wandering_trader_event"];
 
     //Worlds that cannot have blocks broken or placed in them
-    private $immutable_worlds = [];
+	protected $immutable_worlds = [];
 
     //todo add this stuff to max player manager - unset($array[array_search($value, $array)]) p.s I don't remember what this is for and why I didn't do it as of 10/20/2019
     //todo move some stuff from here to a separate EventListener, this should be mainly for loading and initiating what the plugin has to do
     public function onEnable()
     {
-        $this->init();
-    }
-
-    public function init() : bool{
-        $commands = [
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->getServer()->getCommandMap()->registerAll("vanillacommands", [
             new Ability("ability", $this),
             new AlwaysDay("alwaysday", $this),
             new Clear("clear", $this),
@@ -52,18 +43,7 @@ class Loader extends PluginBase implements Listener{
             new MobEvent("mobevent", $this),
             new ImmutableWorld("immutableworld", $this),
             new Tag("tag", $this)
-        ];
-        $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->getServer()->getCommandMap()->registerAll("vanillacommands", $commands);
-        foreach($commands as $command) {
-            $name = $command->getName();
-            if($this->getServer()->getCommandMap()->getCommand($name) == null) return false;
-        }
-        return true;
-    }
-
-    public function getInstance() : Loader{
-        return $this;
+        ]);
     }
 
     public function getMobEvents(){
@@ -109,11 +89,9 @@ class Loader extends PluginBase implements Listener{
     }
 
     public function addImmutableWorld(string $level){
-        if($this->getServer()->getLevelByName($level) instanceof Level){//might be a pointless check for peeps with IDE but still
-            if(!in_array($level, $this->immutable_worlds)){
-                array_push($this->immutable_worlds, $level);
-            }
-        }
+	    if(!in_array($level, $this->immutable_worlds)){
+		    $this->immutable_worlds[] = $level;
+	    }
     }
 
     public function removeImmutableWorld(string $level){
@@ -125,50 +103,25 @@ class Loader extends PluginBase implements Listener{
         }
     }
 
-    public function getMaxCount(){
-        return $this->maxcount;
-    }
-
-    public function setMaxCount(int $count){
-        $this->maxcount = $count;
-    }
-
-    public function getPlayerCount(){
-        return count($this->playercount);
-    }
-
-    public function onJoin(PlayerJoinEvent $event){
-        if(isset($this->maxcount) and $this->maxcount == count($this->playercount)) {
-            $event->getPlayer()->kick("The server is full", false);
-        }
-        elseif(isset($this->maxcount) and $this->maxcount !== count($this->playercount)){
-            array_push($this->playercount, $event->getPlayer()->getName());
-        }
-    }
-
-    public function onLeave(PlayerQuitEvent $event){
-        array_shift($this->playercount);
-    }
-
     public function chatWhenMuted(PlayerChatEvent $event){
-        if(!$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state") or !$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state.mute")){
+        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.mute")){
             $event->setCancelled();
         }
     }
 
     public function placeWhenNotWorldBuilder(BlockPlaceEvent $event){
-        if(!$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state") or !$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
+        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
             $event->setCancelled();
         }
     }
 
     public function breakWhenNotWorldBuilder(BlockBreakEvent $event){
-        if(!$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state") or !$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
+        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.worldbuilder")) {
             $event->setCancelled();
         }
     }
     public function flyingWhenCantFly(PlayerMoveEvent $event){
-        if(!$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state") or !$event->getPlayer()->isOp() and $event->getPlayer()->hasPermission("vanillacommands.state.mayfly")) {
+        if($event->getPlayer()->hasPermission("vanillacommands.state") or $event->getPlayer()->hasPermission("vanillacommands.state.mayfly")) {
             if($event->getPlayer()->isFlying()){
                 $event->getPlayer()->setFlying(false);
             }

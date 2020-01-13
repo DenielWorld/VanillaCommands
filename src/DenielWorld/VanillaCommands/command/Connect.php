@@ -6,31 +6,30 @@ use DenielWorld\VanillaCommands\Loader;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pocketmine\command\PluginIdentifiableCommand;
+use pocketmine\command\utils\InvalidCommandSyntaxException;
+use pocketmine\network\mcpe\protocol\AutomationClientConnectPacket;
 use pocketmine\Player;
-use pocketmine\utils\TextFormat as TF;
 
 class Connect extends PluginCommand implements PluginIdentifiableCommand{
 
     public function __construct(string $name, Loader $owner)
     {
         parent::__construct($name, $owner);
-        $this->setUsage("/connect <Ip> <Port></Port>");
-        $this->setDescription("Connect to other servers");
+        $this->setUsage("/connect <serverUri: text>");
+        $this->setDescription("Attempts to connect to the websocket server on the provided URL");
         $this->setPermission("vanillacommands.command.connect");
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
-        if($sender instanceof Player){
-            if(isset($args[0]) and isset($args[1]) and is_int($args[1])){
-                $sender->transfer($args[0], $args[1]); //too simple, todo: enhance
-            }
-            else {
-                $sender->sendMessage(TF::RED . "Please provide a valid IP and Port");
-            }
+        if(!$sender instanceof Player){
+	        $sender->sendMessage("Please run this command in-game");
+	        return;
         }
-        else {
-            $sender->sendMessage("Please run this command in-game"); #Todo - check for if sender is player in other cmds
-        }
+        if(!isset($args[0]))
+        	throw new InvalidCommandSyntaxException();
+        $pk = new AutomationClientConnectPacket();
+        $pk->serverUri = $args[0];
+        $sender->sendDataPacket($pk);
     }
 }
