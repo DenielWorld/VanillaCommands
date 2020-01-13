@@ -7,6 +7,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\command\utils\InvalidCommandSyntaxException;
+use pocketmine\network\mcpe\protocol\AutomationClientConnectPacket;
 use pocketmine\Player;
 
 class Connect extends PluginCommand implements PluginIdentifiableCommand{
@@ -27,7 +28,8 @@ class Connect extends PluginCommand implements PluginIdentifiableCommand{
         }
         if(!isset($args[0]))
         	throw new InvalidCommandSyntaxException();
-        $parsed = explode(":", $args[0]);
-        $sender->transfer($parsed[0], (int)($parsed[1] ?? 19132));
+        $pk = new AutomationClientConnectPacket();
+        $pk->serverUri = $args[0];
+        $sender->sendDataPacket($pk);
     }
 }
